@@ -1,4 +1,24 @@
-/*! refernece/mixins/_color-states.scss */
+// reference/mixins/_color-states.scss
+
+@mixin property-color-states($property, $base, $hover: darken($base, 12.5%), $active: darken($hover, 12.5%)) {
+	@if $property == 'color' {
+		&,
+		&:visited {
+			#{$property}: $base;
+		}
+	} @else {
+		#{$property}: $base;
+	}
+
+	&:hover,
+	&:focus {
+		#{$property}: $hover;
+	}
+
+	&:active {
+		#{$property}: $active;
+	}
+}
 
 
 //
@@ -8,16 +28,8 @@
 // $param {color} $hover The hover color for the element
 // $param {color} $active The active color for the element
 //
-@mixin background-color-states($base, $hover: darken($base, 10%), $active: darken($base, 20%)) {
-	background-color: $base;
-
-	&:hover {
-		background-color: $hover;
-	}
-
-	&:active {
-		background-color: $active;
-	}
+@mixin background-color-states($base, $hover: darken($base, 12.5%), $active: darken($hover, 12.5%)) {
+	@include property-color-states('background-color', $base, $hover, $active);
 }
 
 
@@ -29,17 +41,6 @@
 // $param {color} $hover The hover color for the element
 // $param {color} $active The active color for the element
 //
-@mixin color-states($base, $hover: darken($base, 10%), $active: darken($base, 20%)) {
-	&,
-	&:visited {
-		color: $base;
-	}
-
-	&:hover {
-		color: $hover;
-	}
-
-	&:active {
-		color: $active;
-	}
+@mixin color-states($base, $hover: darken($base, 12.5%), $active: darken($hover, 12.5%)) {
+	@include property-color-states('color', $base, $hover, $active);
 }
